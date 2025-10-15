@@ -1,72 +1,176 @@
-document.addEventListener("DOMContentLoaded", () => { 
-  const splashScreen = document.getElementById("splash-screen");
+document.addEventListener("DOMContentLoaded", () => {
+  const splash = document.getElementById("splash-screen");
   const mainContent = document.getElementById("main-content");
   const exploreBtn = document.getElementById("explore-btn");
 
-  exploreBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    splashScreen.style.opacity = "0";
+  if (exploreBtn) {
+    exploreBtn.addEventListener("click", (e) => {
+      e.preventDefault();
 
-    setTimeout(() => {
-      splashScreen.style.display = "none";
-      mainContent.classList.remove("hidden");
-      document.getElementById("home").scrollIntoView({ behavior: "smooth" });
-    }, 500);
-  });
+      // Fade out splash
+      splash.style.opacity = "0";
+      splash.style.transition = "opacity 0.8s ease";
+
+      setTimeout(() => {
+        splash.style.display = "none";
+
+        // Reveal sticky navbar
+        mainContent.classList.add("show");
+        document.body.classList.add("loaded");
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 800);
+    });
+  }
 });
 
 
 
-  // Swiper slider
-  new Swiper(".experience-slider", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
-    },
-    breakpoints: {
-      768: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 }
+document.addEventListener('DOMContentLoaded', function () {
+  // enable horizontal wheel scroll on collapsed scroll areas
+  document.querySelectorAll('.experience-scroll').forEach(function(container) {
+    container.addEventListener('wheel', function(e) {
+      // if collapsed -> make vertical wheel scroll horizontally
+      if (container.classList.contains('collapsed')) {
+        e.preventDefault();
+        container.scrollLeft += e.deltaY;
+      }
+    }, { passive: false });
+  });
+
+  // Toggle show more / show less on each category
+  document.querySelectorAll('.exp-toggle-btn').forEach(function(btn) {
+    btn.addEventListener('click', function () {
+      // find the adjacent experience-scroll for this category
+      const wrap = btn.closest('.exp-category-wrap');
+      const scrollContainer = wrap.querySelector('.experience-scroll');
+      const expanded = scrollContainer.classList.toggle('expanded');
+      scrollContainer.classList.toggle('collapsed', !expanded);
+
+      // update aria + label
+      btn.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+      btn.textContent = expanded ? 'Show less' : 'Show more';
+
+      // when expanding, scroll to top of the container so user sees items
+      if (expanded) {
+        scrollContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  });
+
+  // Optional: if user resizes window while expanded, reflow layout
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.experience-scroll.expanded').forEach(function(c) {
+      // small no-op to force repaint if needed
+      c.style.transition = 'none';
+      setTimeout(()=> c.style.transition = '', 50);
+    });
+  });
+});
+
+ 
+
+// ===== Filter Logic =====
+const filterBtns = document.querySelectorAll('.filter-btn');
+const researchItems = document.querySelectorAll('.research-item');
+const seeMoreBtn = document.getElementById('seeMoreBtn');
+
+const itemsToShow = 3;
+let showingAllByCategory = {}; // separate state for each category
+let activeCategory = 'all';
+
+// function to update visibility
+function updateResearchVisibility() {
+  const visibleItems = [...researchItems].filter(item => {
+    return activeCategory === 'all' || item.dataset.category === activeCategory;
+  });
+
+  const showingAll = showingAllByCategory[activeCategory] || false;
+
+  visibleItems.forEach((item, index) => {
+    if (!showingAll && index >= itemsToShow) {
+      item.classList.add('hide');
+    } else {
+      item.classList.remove('hide');
     }
   });
 
-// Splash → Main Content
-document.addEventListener("DOMContentLoaded", () => { 
-  const splashScreen = document.getElementById("splash-screen");
-  const mainContent = document.getElementById("main-content");
-  const exploreBtn = document.getElementById("explore-btn");
+  // hide items not in the selected category
+  researchItems.forEach(item => {
+    if (activeCategory !== 'all' && item.dataset.category !== activeCategory) {
+      item.classList.add('hide');
+    }
+  });
 
-  exploreBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    splashScreen.style.opacity = "0";
+  // update button text
+  seeMoreBtn.textContent = showingAll ? 'See Less' : 'See More';
+}
 
-    setTimeout(() => {
-      splashScreen.style.display = "none";
-      mainContent.classList.remove("hidden");
-      document.getElementById("home").scrollIntoView({ behavior: "smooth" });
-    }, 500);
+// filter button click logic
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    activeCategory = btn.getAttribute('data-filter');
+    if (!(activeCategory in showingAllByCategory)) {
+      showingAllByCategory[activeCategory] = false;
+    }
+
+    updateResearchVisibility();
   });
 });
 
-// Navbar (Sidebar)
-const menuToggle = document.getElementById("menu-toggle");
-const navLinks = document.getElementById("nav-links");
-const closeBtn = document.getElementById("close-btn");
-
-// Open sidebar
-menuToggle.addEventListener("click", () => {
-  navLinks.classList.add("active");
+// see more / less logic per category
+seeMoreBtn.addEventListener('click', () => {
+  showingAllByCategory[activeCategory] = !showingAllByCategory[activeCategory];
+  updateResearchVisibility();
 });
 
-// Close sidebar
-closeBtn.addEventListener("click", () => {
-  navLinks.classList.remove("active");
+// initialize
+showingAllByCategory['all'] = false;
+updateResearchVisibility();
+
+
+
+
+
+
+
+// Projects Swiper
+new Swiper(".project-slider", {
+  slidesPerView: 1,
+  spaceBetween: 25,
+  loop: true,
+  pagination: {
+    el: ".swiper-pagination",
+    clickable: true,
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+  breakpoints: {
+    768: { slidesPerView: 2 },
+    1024: { slidesPerView: 3 }
+  }
+});
+
+
+
+
+// Navbar (Sidebar)
+const menuToggle = document.querySelector('.menu-toggle');
+const closeBtn = document.querySelector('.close-btn');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+  navLinks.classList.add('active');
+});
+
+closeBtn.addEventListener('click', () => {
+  navLinks.classList.remove('active');
 });
 
 // Auto-close when a nav link is clicked
@@ -87,6 +191,24 @@ function closeModal() {
   document.getElementById("pdfViewer").src = "";
 }
 
+
+// ===== PDF Modal =====
+function openCertificate(pdfUrl) {
+  document.getElementById("pdfViewer").src = pdfUrl;
+  document.getElementById("pdfModal").style.display = "flex";
+}
+
+function closeModal() {
+  document.getElementById("pdfModal").style.display = "none";
+  document.getElementById("pdfViewer").src = "";
+}
+
+
+
+
+
+
+
 // Initialize Achievements Slider (Slick or Swiper)
 document.addEventListener("DOMContentLoaded", () => {
   $('.achievement-slider').slick({
@@ -102,6 +224,17 @@ document.addEventListener("DOMContentLoaded", () => {
     ]
   });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 // Rotating dancing text - continuous loop
 (function() {
