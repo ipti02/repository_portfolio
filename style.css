@@ -39,16 +39,6 @@ section {
 
 #contact {
   margin-top: 0 !important;
-section h2::after {
-  content: "";
-  display: block;
-  width: 80px;
-  height: 3px;
-  margin: 10px auto 0;
-  background: linear-gradient(90deg, var(--deep-darkest-orange), var(--deep-darkest-blue));
-  border-radius: 2px;
-}
-
   color: var(--deep-darkest-orange);
   font-weight: bold;
   margin-right: 10px;
@@ -211,7 +201,7 @@ section h2::after {
 .splash-role {
   text-align: center;
   font-size: 1rem;
-  color: #ccc;
+  color: #f8f4f4;
   margin-bottom: 15px;
 }
 
@@ -219,13 +209,15 @@ section h2::after {
 .splash-details {
   text-align: center;
   font-size: 1.6rem;
-  color: rgb(13, 4, 91);
+  color: rgb(242, 241, 249);
   line-height: 1.8;
   margin-bottom: 20px;
   padding: 0 10px;
 }
 
-
+.splash-details b{
+  color:#f4b400 ;
+}
 
 
 
@@ -394,7 +386,6 @@ nav {
   align-items: center;
   padding: 12px 24px;
 
-
 }
 
 nav .logo {
@@ -408,7 +399,6 @@ nav .logo-img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
- 
 
 }
 
@@ -731,7 +721,7 @@ nav .logo-img {
 .hero-text h2 {
   font-size: 1.5rem;
   color: var(--deep-darkest-blue);
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-weight: 500;
 }
 
@@ -783,6 +773,7 @@ nav .logo-img {
   align-items: center;      /* vertically align (if needed) */
   gap: 20px;                /* space between buttons */
   margin-top: 20px;
+  margin-bottom: 55px;
 }
 .hero-buttons .btn,
 .hero-buttons .btn-outline {
@@ -887,31 +878,40 @@ nav .logo-img {
   }
 }
 
-/* =========================
-   Sections
-   ========================= */
-section {
-  padding: 40px 20px;
-  text-align: center;
-}
-section h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #0b3d91;
-}
+
 
 /* =========================
    Education
    ========================= */
 #education {
-  background: #f4f6fb;
-  padding: 60px 20px;
+  padding: 20px 6%;
+  color: #fff;
 }
+
 #education h2 {
-  font-size: 2.2rem;
-  margin-bottom: 30px;
-  color: var(--deep-darkest-blue);
+  text-align: center;
+  font-size: 2.5rem;
+  color:var(--deep-darkest-blue);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
 }
+
+#education h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
+}
+
+
+
+
 .edu-item {
   background: #ffffff;
   padding: 20px;
@@ -922,6 +922,7 @@ section h2 {
   box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
   text-align: left;
+  
 }
 .edu-item h3 {
   color: var(--deep-darkest-orange);
@@ -948,7 +949,7 @@ section h2 {
    ========================= */
 
 #experience {
-  padding: 60px 6%;
+  padding: 20px 6%;
   color: #fff;
 }
 
@@ -956,20 +957,29 @@ section h2 {
   text-align: center;
   font-size: 2.5rem;
   color:var(--deep-darkest-blue);
-  margin-bottom: 40px;
+  margin-top: 0%;
   text-transform: uppercase;
   letter-spacing: 1px;
+  
 }
 
-/* =========================
-   Category Button Style
-   ========================= */
+
+#experience h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
+}
+
 
 
 /* =========================
    Experience Card
    ========================= */
-
 
 .experience-card {
   background: #0a1129;
@@ -1061,8 +1071,13 @@ section h2 {
 
 /* Medium Screens (tablets) */
 @media (max-width: 1024px) {
+  
+  #experience{
+    padding: 20px 5%;
+  }
+
   #experience h2 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     padding-bottom: 0px;
   }
 
@@ -1096,7 +1111,7 @@ section h2 {
 /* Small Screens (phones) */
 @media (max-width: 768px) {
   #experience {
-    padding: 40px 5%;
+    padding: 20px 5%;
   }
 
   .exp-category {
@@ -1314,6 +1329,36 @@ section h2 {
    Project Cards
    ========================= */
 
+#projects {
+  padding: 20px 6%;
+  color: #fff;
+}
+
+#projects h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color:var(--deep-darkest-blue);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+}
+
+#projects h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
+}
+
+
+
+
+
 .project-slider {
 
   max-width: 1200px;
@@ -1333,17 +1378,7 @@ section h2 {
 
 
 
-#projects {
-  padding: 60px 20px;
-  background: #f8f9fc;
-}
 
-#projects h2 {
-  text-align: center;
-  margin-bottom: 40px;
-  font-size: 2rem;
-  color: var(--deep-darkest-blue);
-}
 
 /* Grid Layout */
 .project-grid {
@@ -1445,27 +1480,31 @@ section h2 {
 /* research section*/
 /* ====== Research Section (same as before) ====== */
 #research {
-  padding: 70px 20px;
-  background: #f8f9fc;
+  padding: 20px 6%;
+  color: #fff;
 }
 
 #research h2 {
   text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 50px;
-  color: var(--deep-darkest-blue);
-  position: relative;
+  font-size: 2.5rem;
+  color:var(--deep-darkest-blue);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
 }
 
 #research h2::after {
   content: "";
   display: block;
-  width: 80px;
+  width: 100px;
   height: 4px;
-  background: var(--deep-darkest-orange);
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
   margin: 12px auto 0;
   border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
 }
+
 
 /* Timeline container */
 .research-timeline {
@@ -1476,17 +1515,44 @@ section h2 {
   max-width: auto;
 }
 
+
+
 /* Research item */
 .research-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
   margin-bottom: 20px;
   position: relative;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  flex: 0 0 240px;
+  background: #fff;
+  transition: all 0.35s ease;
+  scroll-snap-align: center;
+  border: 2px solid transparent;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+
+}
+
+
+.research-item:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(158, 74, 74, 0.836);
+
 }
 
 .research-item::before {
   content: "";
   position: absolute;
-  left: -12px;
-  top: 5px;
+  left: -35px;
+  top: 10px;
   width: 20px;
   height: 20px;
   background: var(--deep-darkest-orange);
@@ -1494,7 +1560,7 @@ section h2 {
   border: 3px solid #fff;
   box-shadow: 0 0 0 3px var(--deep-darkest-blue);
 }
-
+ 
 /* Year label */
 .research-year {
   font-size: 1.1rem;
@@ -1511,9 +1577,10 @@ section h2 {
 }
 
 .research-meta {
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
-  color: #555;
+  color: #050505;
+ text-align: center;
   margin-bottom: 10px;
   display: block;
 }
@@ -1533,6 +1600,7 @@ section h2 {
   border-radius: 6px;
   text-decoration: none;
   transition: background 0.3s;
+  text-align: center;
 }
 
 .research-link:hover {
@@ -1572,6 +1640,7 @@ section h2 {
   }
 
   .research-year {
+    text-align: center;
     font-size: 1rem;
     margin-bottom: 8px;
     color: var(--deep-darkest-blue);
@@ -1645,18 +1714,7 @@ section h2 {
   background: var(--deep-darkest-blue);
 }
 
-/* ====== Smooth show/hide animation ====== */
-.research-item {
-  transition: all 0.4s ease;
-}
 
-.research-item.hide {
-  opacity: 0;
-  transform: scale(0.9);
-  height: 0;
-  margin: 0;
-  overflow: hidden;
-}
 
 /* Responsive Buttons */
 @media (max-width: 768px) {
@@ -1673,6 +1731,34 @@ section h2 {
 /* =========================
    Certifications & Awards Section
    ========================= */
+
+#certifications-awards {
+  padding: 20px 6%;
+  color: #fff;
+}
+
+#certifications-awards h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color:var(--deep-darkest-blue);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  
+}
+
+#certifications-awards h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
+}
+
+
 .certifications-section {
   background: linear-gradient(180deg, #f9fafc, #ffffff);
   padding: 0px 20px;
@@ -1815,10 +1901,31 @@ section h2 {
 
 
 /* Achievements Slider */
-.sub-heading {
-  margin: 10px 0 10px;
-  color: var(--deep-darkest-blue);
+
+#sub-heading {
+  padding: 20px 6%;
+  color: #fff;
+}
+
+#sub-heading h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color:var(--deep-darkest-blue);
+  margin-bottom: 40px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   
+}
+
+#sub-heading h2::after {
+  content: "";
+  display: block;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #ff7e5f, #feb47b);
+  margin: 12px auto 0;
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(255, 126, 95, 0.6);
 }
 
 
