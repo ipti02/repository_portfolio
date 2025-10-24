@@ -70,68 +70,70 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
  
+document.addEventListener("DOMContentLoaded", () => {
 
-// ===== Filter Logic =====
-const filterBtns = document.querySelectorAll('.filter-btn');
-const researchItems = document.querySelectorAll('.research-item');
-const seeMoreBtn = document.getElementById('seeMoreBtn');
+  // ===== Filter Logic =====
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const researchItems = document.querySelectorAll('.research-item');
+  const seeMoreBtn = document.getElementById('seeMoreBtn');
 
-const itemsToShow = 3;
-let showingAllByCategory = {}; // separate state for each category
-let activeCategory = 'all';
+  const itemsToShow = 3;
+  let showingAllByCategory = {}; // separate state for each category
+  let activeCategory = 'all';
 
-// function to update visibility
-function updateResearchVisibility() {
-  const visibleItems = [...researchItems].filter(item => {
-    return activeCategory === 'all' || item.dataset.category === activeCategory;
+  // function to update visibility
+  function updateResearchVisibility() {
+    const visibleItems = [...researchItems].filter(item => {
+      return activeCategory === 'all' || item.dataset.category === activeCategory;
+    });
+
+    const showingAll = showingAllByCategory[activeCategory] || false;
+
+    visibleItems.forEach((item, index) => {
+      if (!showingAll && index >= itemsToShow) {
+        item.classList.add('hide');
+      } else {
+        item.classList.remove('hide');
+      }
+    });
+
+    // hide items not in the selected category
+    researchItems.forEach(item => {
+      if (activeCategory !== 'all' && item.dataset.category !== activeCategory) {
+        item.classList.add('hide');
+      }
+    });
+
+    // update button text
+    seeMoreBtn.textContent = showingAll ? 'See Less' : 'See More';
+  }
+
+  // filter button click logic
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      activeCategory = btn.getAttribute('data-filter');
+      if (!(activeCategory in showingAllByCategory)) {
+        showingAllByCategory[activeCategory] = false;
+      }
+
+      updateResearchVisibility();
+    });
   });
 
-  const showingAll = showingAllByCategory[activeCategory] || false;
-
-  visibleItems.forEach((item, index) => {
-    if (!showingAll && index >= itemsToShow) {
-      item.classList.add('hide');
-    } else {
-      item.classList.remove('hide');
-    }
-  });
-
-  // hide items not in the selected category
-  researchItems.forEach(item => {
-    if (activeCategory !== 'all' && item.dataset.category !== activeCategory) {
-      item.classList.add('hide');
-    }
-  });
-
-  // update button text
-  seeMoreBtn.textContent = showingAll ? 'See Less' : 'See More';
-}
-
-// filter button click logic
-filterBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    activeCategory = btn.getAttribute('data-filter');
-    if (!(activeCategory in showingAllByCategory)) {
-      showingAllByCategory[activeCategory] = false;
-    }
-
+  // see more / less logic per category
+  seeMoreBtn.addEventListener('click', () => {
+    showingAllByCategory[activeCategory] = !showingAllByCategory[activeCategory];
     updateResearchVisibility();
   });
-});
 
-// see more / less logic per category
-seeMoreBtn.addEventListener('click', () => {
-  showingAllByCategory[activeCategory] = !showingAllByCategory[activeCategory];
+  // initialize
+  showingAllByCategory['all'] = false;
   updateResearchVisibility();
+
 });
-
-// initialize
-showingAllByCategory['all'] = false;
-updateResearchVisibility();
-
 
 
 
