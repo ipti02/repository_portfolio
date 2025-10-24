@@ -910,7 +910,9 @@ nav .logo-img {
 }
 
 
-
+.edu-item p  {
+  color: #000;
+}
 
 .edu-item {
   background: #ffffff;
@@ -1726,6 +1728,9 @@ nav .logo-img {
   }
 }
 
+.hide {
+  display: none !important;
+}
 
 
 /* =========================
