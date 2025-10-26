@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// Projects Swiper
+// ===== Projects Swiper =====
 new Swiper(".project-slider", {
   slidesPerView: 1,
   spaceBetween: 25,
@@ -159,6 +159,24 @@ new Swiper(".project-slider", {
   }
 });
 
+// ===== Show More / Less Details in Project Cards =====
+const projectToggleBtn = document.getElementById('projectToggleBtn');
+const projectCards = document.querySelectorAll('.project-card');
+let showAllDetails = false;
+
+projectToggleBtn.addEventListener('click', () => {
+  showAllDetails = !showAllDetails;
+
+  projectCards.forEach(card => {
+    if (showAllDetails) {
+      card.classList.add('show-details');
+    } else {
+      card.classList.remove('show-details');
+    }
+  });
+
+  projectToggleBtn.textContent = showAllDetails ? 'See Less' : 'See More';
+});
 
 
 

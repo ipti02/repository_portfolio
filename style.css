@@ -1397,7 +1397,8 @@ nav .logo-img {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s ease;
+  max-height: 450px; 
   display: flex;
   flex-direction: column;
 }
@@ -1426,6 +1427,22 @@ nav .logo-img {
   display: flex;
   flex-direction: column;
 }
+.project-card.show-details {
+  max-height: 1000px; /* allow full content */
+}
+
+.project-card p {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* show only 4 lines when collapsed */
+  -webkit-box-orient: vertical;
+  transition: all 0.4s ease;
+}
+
+.project-card.show-details p {
+  -webkit-line-clamp: unset;
+}
 
 .project-content h3 {
   color: var(--deep-darkest-orange);
@@ -1437,7 +1454,35 @@ nav .logo-img {
   color: #444;
   margin-bottom: 15px;
   line-height: 1.6;
+  text-align: justify;
 }
+
+.project-toggle-btn {
+  background-color: #050355;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.project-toggle-btn:hover {
+  background-color: #ecf0f3;
+  color: #000;
+  border: 4px solid #021932;
+}
+
+
+
+
+
+
+
+
+
+
 
 /* Tech Stack List */
 .tech-list {
@@ -1465,9 +1510,10 @@ nav .logo-img {
 
 .project-btn {
   display: inline-block;
-  padding: 10px 15px;
+  padding: 10px 10px;
   background: var(--deep-darkest-blue);
   color: #fff;
+ 
   font-weight: 600;
   border-radius: 8px;
   text-decoration: none;
